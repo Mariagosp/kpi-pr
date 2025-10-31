@@ -36,7 +36,7 @@ const scoreMeta = document.getElementById("scoreMeta");
 const progBar = document.getElementById("progBar");
 const resultArea = document.getElementById("resultArea");
 const questionArea = document.getElementById("questionArea");
-const finalScore = document.getElementById("finalScore");
+const finalScores = document.getElementById("finalScore");
 const totalQ = document.getElementById("totalQ");
 
 let currentQuestion = 0;
