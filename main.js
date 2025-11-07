@@ -1,29 +1,29 @@
 const questions = [
   {
-    question: "Which language is used for web page markup?",
-    choices: ["Python", "CSS", "HTML", "Java"],
-    correct: 2,
+    question: "Який тип поні несе відповідальність за погоду та є втіленням Елемента Вірність?",
+    choices: ["Єдинорог", "Земні поні", "Алікорни", "Пегаси"],
+    correct: 3,
   },
   {
     question:
-      "How many bytes are there in one kilobyte (according to the standard computer definition)?",
-    choices: ["1000", "1024", "1200", "2048"],
-    correct: 1,
+      "Як звати дракона-помічника Твайлайт Спаркл?",
+    choices: ["Спайк", "Джон", "Лондон", "Пуер"],
+    correct: 0,
   },
   {
-    question: "What does CSS do?",
+    question: "Яка поні відповідає за організацію вечірок та є втіленням Елемента Сміх?",
     choices: [
-      "Adds behavior",
-      "Defines style and layout",
-      "Processes data on the server",
-      "Stores a database",
+      "Пінкі Пай",
+      "Раріті",
+      "Іскорка",
+      "Рейнбоудеш",
     ],
-    correct: 1,
+    correct: 0,
   },
   {
-    question: "Which tag is used for the first-level heading in HTML?",
-    choices: ["<head>", "<h1>", "<title>", "<header>"],
-    correct: 1,
+    question: "Як звуть молодшу сестру Епплджек?",
+    choices: ["Еплкава", "Еплгруша", "Еплблум", "Еплавер"],
+    correct: 2,
   },
 ];
 
@@ -43,4 +43,48 @@ let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = null;
 
-function showQuestion() {}
+  function showQuestion() {
+  const q = questions[currentQuestion];
+  questionText.textContent = q.question;
+  choicesList.innerHTML = "";
+
+  q.choices.forEach((choice, index) => {
+    const btn = document.createElement("button");
+    btn.classList.add("choice");
+    btn.textContent = choice;
+    btn.addEventListener("click", () => selectAnswer(index));
+    choicesList.appendChild(btn);
+  });
+
+  nextBtn.disabled = true;
+}
+function selectAnswer(index) {
+  const q = questions[currentQuestion];
+  const buttons = document.querySelectorAll(".choice");
+  
+  buttons.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add("correct");
+    if (i === index && i !== q.correct) btn.classList.add("wrong");
+  });
+
+  if (index === q.correct) score++;
+
+  scoreMeta.textContent = `Points: ${score}`;
+  nextBtn.disabled = false;
+}
+nextBtn.addEventListener("click", () => {
+  currentQuestion++;
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+function showResult() {
+  questionArea.style.display = "none";
+  resultArea.style.display = "block";
+  finalScore.textContent = score;
+  totalQ.textContent = questions.length;
+}
+showQuestion();
