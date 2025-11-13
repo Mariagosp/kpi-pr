@@ -89,8 +89,6 @@ function showResult() {
   finalScores.textContent = score;
   totalQ.textContent = questions.length;
 }
-
-// 🟢 Спільна функція для обох кнопок рестарту
 function restartQuiz() {
   currentQuestion = 0;
   score = 0;
@@ -99,9 +97,6 @@ function restartQuiz() {
   questionArea.style.display = "block";
   showQuestion();
 }
-
-// Обидві кнопки працюють:
 restartBtn.addEventListener("click", restartQuiz);
 restartBtn2.addEventListener("click", restartQuiz);
-
 showQuestion();
